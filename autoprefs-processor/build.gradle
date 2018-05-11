@@ -1,0 +1,20 @@
+apply plugin: 'java-library'
+apply plugin: 'groovy'
+
+sourceSets {
+    test {
+        // ugly hack that allows to run groovy tests from Android Studio
+        groovy.outputDir = java.outputDir
+    }
+}
+
+dependencies {
+    implementation project(':autoprefs-annotation')
+    implementation "com.squareup:javapoet:${versions.javapoet}"
+    testImplementation "junit:junit:${versions.junit}"
+    testImplementation "org.mockito:mockito-core:${versions.mockito}"
+    testImplementation "org.codehaus.groovy:groovy-all:${versions.groovy}"
+}
+
+sourceCompatibility = versions.sourceCompatibility
+targetCompatibility = versions.targetCompatibility

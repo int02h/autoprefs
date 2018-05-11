@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">autoprefsapp</string>
+    <string name="welcome_title">Welcome!</string>
+    <string name="welcome_message">This is the first launch of the app</string>
+    <string name="btn_ok">OK</string>
+    <string name="start_count">Start count: %d</string>
+    <string name="name_hint">Enter your name</string>
+    <string name="btn_reset">Reset</string>
+</resources>
