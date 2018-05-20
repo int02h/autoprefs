@@ -45,17 +45,17 @@ There are six annotations that can be used to set up preference default value. E
 * DefaultString
 * DefaultStringSet
 
-Clear preference
-----------------
+Clear preferences
+-----------------
 Declare void method without arguments and place @ClearMethod annotation on it. When called this method will clear all values in SharedPreferences.
 
 Download
 --------
 To use latest version of the library just add the following code to your Gradle build script:
 ```groovy
-implementation 'com.dpforge:autoprefs:1.0.1'
-implementation 'com.dpforge:autoprefs-annotation:1.0.1'
-annotationProcessor 'com.dpforge:autoprefs-processor:1.0.1'
+implementation 'com.dpforge:autoprefs:1.0.2'
+implementation 'com.dpforge:autoprefs-annotation:1.0.2'
+annotationProcessor 'com.dpforge:autoprefs-processor:1.0.2'
 ```
 
 License
