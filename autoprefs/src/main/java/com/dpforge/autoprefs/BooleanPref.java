@@ -2,6 +2,9 @@ package com.dpforge.autoprefs;
 
 import android.content.SharedPreferences;
 
+/**
+ * Represent preference holding boolean value
+ */
 public class BooleanPref extends BasePref<Boolean> {
 
     protected final boolean defaultValue;
@@ -30,14 +33,23 @@ public class BooleanPref extends BasePref<Boolean> {
         setBoolean(value);
     }
 
+    /**
+     * Same as {@link #get()} but for those who care about boxing
+     */
     public boolean getBoolean() {
         return getOrDefaultBoolean(defaultValue);
     }
 
+    /**
+     * Same as {@link #getOrDefault(Boolean)} but for those who care about boxing
+     */
     public boolean getOrDefaultBoolean(final boolean defaultValue) {
         return prefs.getBoolean(key, defaultValue);
     }
 
+    /**
+     * Same as {@link #set(Boolean)} but for those who care about boxing
+     */
     public void setBoolean(final boolean value) {
         prefs.edit().putBoolean(key, value).apply();
     }

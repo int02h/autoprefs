@@ -2,6 +2,9 @@ package com.dpforge.autoprefs;
 
 import android.content.SharedPreferences;
 
+/**
+ * Represent preference holding long value
+ */
 public class LongPref extends BasePref<Long> {
 
     protected final long defaultValue;
@@ -30,14 +33,23 @@ public class LongPref extends BasePref<Long> {
         setLong(value);
     }
 
+    /**
+     * Same as {@link #get()} but for those who care about boxing
+     */
     public long getLong() {
         return getOrDefaultLong(defaultValue);
     }
 
+    /**
+     * Same as {@link #getOrDefault(Long)} but for those who care about boxing
+     */
     public long getOrDefaultLong(final long defaultValue) {
         return prefs.getLong(key, defaultValue);
     }
 
+    /**
+     * Same as {@link #set(Long)} but for those who care about boxing
+     */
     public void setLong(final long value) {
         prefs.edit().putLong(key, value).apply();
     }

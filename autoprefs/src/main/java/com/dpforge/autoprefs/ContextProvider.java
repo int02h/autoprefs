@@ -11,6 +11,9 @@ import android.support.annotation.RestrictTo;
 
 import static android.support.annotation.RestrictTo.Scope.LIBRARY;
 
+/**
+ * ContentProvider whose only purpose is to hold application context
+ */
 @RestrictTo(LIBRARY)
 public class ContextProvider extends ContentProvider {
 

@@ -2,6 +2,9 @@ package com.dpforge.autoprefs;
 
 import android.content.SharedPreferences;
 
+/**
+ * Represent preference holding float value
+ */
 public class FloatPref extends BasePref<Float> {
 
     protected final float defaultValue;
@@ -30,14 +33,23 @@ public class FloatPref extends BasePref<Float> {
         setFloat(value);
     }
 
+    /**
+     * Same as {@link #get()} but for those who care about boxing
+     */
     public float getFloat() {
         return getOrDefaultFloat(defaultValue);
     }
 
+    /**
+     * Same as {@link #getOrDefault(Float)} but for those who care about boxing
+     */
     public float getOrDefaultFloat(final float defaultValue) {
         return prefs.getFloat(key, defaultValue);
     }
 
+    /**
+     * Same as {@link #set(Float)} but for those who care about boxing
+     */
     public void setFloat(final float value) {
         prefs.edit().putFloat(key, value).apply();
     }

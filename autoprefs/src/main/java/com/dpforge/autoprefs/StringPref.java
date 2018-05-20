@@ -2,6 +2,9 @@ package com.dpforge.autoprefs;
 
 import android.content.SharedPreferences;
 
+/**
+ * Represent preference holding String value
+ */
 public class StringPref extends BasePref<String> {
 
     protected final String defaultValue;

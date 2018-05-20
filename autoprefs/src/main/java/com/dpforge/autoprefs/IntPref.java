@@ -2,6 +2,9 @@ package com.dpforge.autoprefs;
 
 import android.content.SharedPreferences;
 
+/**
+ * Represent preference holding int value
+ */
 public class IntPref extends BasePref<Integer> {
 
     protected final int defaultValue;
@@ -30,14 +33,23 @@ public class IntPref extends BasePref<Integer> {
         setInt(value);
     }
 
+    /**
+     * Same as {@link #get()} but for those who care about boxing
+     */
     public int getInt() {
         return getOrDefaultInt(defaultValue);
     }
 
+    /**
+     * Same as {@link #getOrDefault(Integer)} but for those who care about boxing
+     */
     public int getOrDefaultInt(final int defaultValue) {
         return prefs.getInt(key, defaultValue);
     }
 
+    /**
+     * Same as {@link #set(Integer)} but for those who care about boxing
+     */
     public void setInt(final int value) {
         prefs.edit().putInt(key, value).apply();
     }

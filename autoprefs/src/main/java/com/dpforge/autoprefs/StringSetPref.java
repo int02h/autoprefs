@@ -6,6 +6,9 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Represent preference holding set of the strings
+ */
 public class StringSetPref extends BasePref<Set<String>> {
 
     protected final Set<String> defaultValue;
