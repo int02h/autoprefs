@@ -5,6 +5,9 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * Set up default value of the String preference
+ */
 @Retention(RetentionPolicy.SOURCE)
 @Target(ElementType.METHOD)
 @PrefDefaultValue("com.dpforge.autoprefs.StringPref")
