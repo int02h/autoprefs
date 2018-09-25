@@ -4,54 +4,61 @@ apply plugin: 'signing'
 group = GROUP
 version = VERSION_NAME
 
-signing {
-    sign configurations.archives
-}
+if (hasSonatypeCredentials()) {
 
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+    signing {
+        sign configurations.archives
+    }
 
-            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-                authentication(userName: sonatypeUsername, password: sonatypePassword)
-            }
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
 
-            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-                authentication(userName: sonatypeUsername, password: sonatypePassword)
-            }
-
-            pom.groupId = GROUP
-            pom.artifactId = POM_ARTIFACT_ID
-            pom.version = VERSION_NAME
-
-            pom.project {
-                name POM_NAME
-                packaging POM_PACKAGING
-                description POM_DESCRIPTION
-                url POM_URL
-
-                scm {
-                    connection POM_SCM_CONNECTION
-                    developerConnection POM_SCM_DEV_CONNECTION
-                    url POM_SCM_URL
+                repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                    authentication(userName: sonatypeUsername, password: sonatypePassword)
                 }
 
-                licenses {
-                    license {
-                        name 'MIT License'
-                        url 'https://opensource.org/licenses/MIT'
+                snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                    authentication(userName: sonatypeUsername, password: sonatypePassword)
+                }
+
+                pom.groupId = GROUP
+                pom.artifactId = POM_ARTIFACT_ID
+                pom.version = VERSION_NAME
+
+                pom.project {
+                    name POM_NAME
+                    packaging POM_PACKAGING
+                    description POM_DESCRIPTION
+                    url POM_URL
+
+                    scm {
+                        connection POM_SCM_CONNECTION
+                        developerConnection POM_SCM_DEV_CONNECTION
+                        url POM_SCM_URL
                     }
-                }
 
-                developers {
-                    developer {
-                        id 'int02h'
-                        name 'Daniil Popov'
-                        email 'int02h@gmail.com'
+                    licenses {
+                        license {
+                            name 'MIT License'
+                            url 'https://opensource.org/licenses/MIT'
+                        }
+                    }
+
+                    developers {
+                        developer {
+                            id 'int02h'
+                            name 'Daniil Popov'
+                            email 'int02h@gmail.com'
+                        }
                     }
                 }
             }
         }
     }
+}
+
+private hasSonatypeCredentials() {
+    return binding.hasVariable('sonatypeUsername') && binding.hasVariable('sonatypePassword')
 }
