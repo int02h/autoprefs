@@ -1,4 +1,4 @@
-# autoprefs
+# autoprefs [![Build Status](https://travis-ci.com/int02h/autoprefs.svg?branch=master)](https://travis-ci.com/int02h/autoprefs)
 Autoprefs library based on compile-time code generation lets you eliminate boilerplate code for working with Android SharedPreferences. Generated code is fast as if you would wrote it by yourself. Only one reflection call is used to create instance of generated class.
 
 Example
