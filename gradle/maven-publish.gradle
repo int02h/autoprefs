@@ -60,5 +60,5 @@ if (hasSonatypeCredentials()) {
 }
 
 private hasSonatypeCredentials() {
-    return binding.hasVariable('sonatypeUsername') && binding.hasVariable('sonatypePassword')
+    return hasProperty('sonatypeUsername') && hasProperty('sonatypePassword')
 }
