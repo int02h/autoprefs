@@ -3,18 +3,19 @@
 buildscript {
 
     ext.versions = [
-            'compileSdk': 27,
-            'targetSdk': 27,
-            'minSdk': 19,
+            'compileSdk'         : 27,
+            'targetSdk'          : 27,
+            'minSdk'             : 19,
             'sourceCompatibility': JavaVersion.VERSION_1_7,
             'targetCompatibility': JavaVersion.VERSION_1_7,
-            'supportLibrary': '27.1.1',
-            'junit': '4.12',
-            'mockito': '2.18.3',
-            'javapoet': '1.11.0',
-            'groovy': '2.4.12'
+            'supportLibrary'     : '27.1.1',
+            'junit'              : '4.12',
+            'mockito'            : '2.18.3',
+            'javapoet'           : '1.11.0',
+            'groovy'             : '2.4.12',
+            'ocubator'           : '1.2.0'
     ]
-    
+
     repositories {
         google()
         jcenter()

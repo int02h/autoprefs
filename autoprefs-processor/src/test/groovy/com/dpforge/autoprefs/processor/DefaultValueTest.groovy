@@ -1,11 +1,12 @@
 package com.dpforge.autoprefs.processor
 
+import android.content.Context
 import com.dpforge.autoprefs.annotation.DefaultInt
+import com.dpforge.ocubator.CompilationError
+import com.dpforge.ocubator.CompilationResult
 import org.junit.Test
 
-import javax.tools.Diagnostic
-
-class DefaultValueTest {
+class DefaultValueTest extends BaseCompilationTest {
     @Test
     void defaultBoolean() {
         def prefs = compile("@DefaultBoolean(true) BooleanPref bar();")
@@ -50,7 +51,6 @@ class DefaultValueTest {
         assert errorList.size() == 1
 
         def error = errorList.get(0)
-        assert error.kind == Diagnostic.Kind.ERROR
         assert error.message == "Default value for this field cannot be set via '${DefaultInt.class.name}' annotation"
     }
 
@@ -65,7 +65,9 @@ class DefaultValueTest {
                 @DefaultStringSet({}) BooleanPref bar5();
                 """, errorList)
         assert errorList.size() == 5
-        errorList.each { assert it.message.startsWith('Default value for this field cannot be set via')}
+        errorList.each {
+            assert it.message.startsWith('Default value for this field cannot be set via')
+        }
     }
 
     @Test
@@ -79,7 +81,9 @@ class DefaultValueTest {
                 @DefaultStringSet({}) FloatPref bar5();
                 """, errorList)
         assert errorList.size() == 5
-        errorList.each { assert it.message.startsWith('Default value for this field cannot be set via')}
+        errorList.each {
+            assert it.message.startsWith('Default value for this field cannot be set via')
+        }
     }
 
     @Test
@@ -93,7 +97,9 @@ class DefaultValueTest {
                 @DefaultStringSet({})  IntPref bar5();
                 """, errorList)
         assert errorList.size() == 5
-        errorList.each { assert it.message.startsWith('Default value for this field cannot be set via')}
+        errorList.each {
+            assert it.message.startsWith('Default value for this field cannot be set via')
+        }
     }
 
     @Test
@@ -107,7 +113,9 @@ class DefaultValueTest {
                 @DefaultStringSet({})  LongPref bar5();
                 """, errorList)
         assert errorList.size() == 5
-        errorList.each { assert it.message.startsWith('Default value for this field cannot be set via')}
+        errorList.each {
+            assert it.message.startsWith('Default value for this field cannot be set via')
+        }
     }
 
     @Test
@@ -121,7 +129,9 @@ class DefaultValueTest {
                 @DefaultStringSet({})  StringPref bar5();
                 """, errorList)
         assert errorList.size() == 5
-        errorList.each { assert it.message.startsWith('Default value for this field cannot be set via')}
+        errorList.each {
+            assert it.message.startsWith('Default value for this field cannot be set via')
+        }
     }
 
     @Test
@@ -135,7 +145,9 @@ class DefaultValueTest {
                 @DefaultString("")    StringSetPref bar5();
                 """, errorList)
         assert errorList.size() == 5
-        errorList.each { assert it.message.startsWith('Default value for this field cannot be set via')}
+        errorList.each {
+            assert it.message.startsWith('Default value for this field cannot be set via')
+        }
     }
 
     @Test
@@ -144,7 +156,6 @@ class DefaultValueTest {
         compile("""@BadDefault(badValue = 0) IntPref bar();""", errorList)
         assert errorList.size() == 1
         def error = errorList.get(0)
-        assert error.kind == Diagnostic.Kind.ERROR
         assert error.message == 'Default value annotation has no value()'
     }
 
@@ -153,23 +164,21 @@ class DefaultValueTest {
     }
 
     private static Object compile(String body, List<CompilationError> compilationErrors) {
-        def packageName = 'test'
-        def className = 'Foo'
-        def code = """
-            package ${packageName};
+        CompilationResult result = getCompilatiomResult("""
+            package test;
             import com.dpforge.autoprefs.annotation.*;
             import com.dpforge.autoprefs.*;
             @AutoPrefs
-            interface ${className} {
+            interface Foo {
                 ${body}
             }
-            """
+            """)
 
-        return TestCompiler.create()
-                .packageName(packageName)
-                .className(className)
-                .code(code)
-                .compilationErrors(compilationErrors)
-                .compile()
+        if (result.isSuccess()) {
+            return result.newInstanceOf("test.Foo_Prefs").withConstructor(Context.class).please(new Context())
+        } else {
+            compilationErrors.addAll(result.errors)
+            return null
+        }
     }
 }
